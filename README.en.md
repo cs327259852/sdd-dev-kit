@@ -17,8 +17,7 @@ sdd-archive
 ```
 
 The goal is not to copy one project's business knowledge into another project.
-The goal is to copy the workflow, gates, templates, and agent instructions, then
-let the target project generate its own facts through `sdd-bootstrap`.
+The goal is to copy the workflow, gates, templates, and agent instructions, then let the target project generate its own facts through `sdd-bootstrap`.
 
 ## What This Project Contains
 
@@ -124,5 +123,5 @@ Run this from a target project after installation:
 bash /path/to/sdd-dev-kit/scripts/check-sdd.sh
 ```
 
-The checker validates that the portable workflow files exist and that no
-project-specific facts were installed accidentally.
+The checker validates that the portable workflow files exist and that no project-specific facts were installed accidentally.
+
