@@ -120,6 +120,54 @@ Les garde-fous sont intentionnels :
 - Pas de `tasks.md` Approved, pas de modification du code.
 - Une validation échouée bloque l'archivage.
 
+## Retour arrière d'étape
+
+Utilisez un rollback lorsqu'un artefact amont déjà relu n'est plus correct.
+
+```text
+sdd-tasks rollback
+{pourquoi tasks.md doit changer}
+
+sdd-plan rollback
+{pourquoi plan.md doit changer}
+
+sdd-spec rollback
+{pourquoi spec.md doit changer}
+```
+
+Règles de rollback :
+
+- Si des tâches manquent ou si la validation est incomplète, revenez sur `tasks.md`; il doit être approuvé à nouveau avant de continuer les changements de code.
+- Si la conception, le périmètre d'impact ou la stratégie de validation est incorrecte, revenez sur `plan.md`; `tasks.md` est aussi rouvert.
+- Si les exigences, critères d'acceptation, règles métier, permissions, sens des données ou compatibilité changent, revenez sur `spec.md`; `plan.md` et `tasks.md` sont aussi rouverts.
+- Après un rollback, arrêtez le codage jusqu'à ce que les artefacts rouverts repassent les validations humaines.
+
+## Mettre à jour un projet existant
+
+Si un projet a déjà installé SDD Dev Kit et que ce dépôt GitHub reçoit des mises à jour, mettez à jour uniquement les fichiers portables du workflow :
+
+```bash
+cd ~/my_github/sdd-dev-kit
+git pull
+
+cd /path/to/your-project
+bash ~/my_github/sdd-dev-kit/scripts/install.sh --force
+```
+
+Si le projet cible utilise Codex :
+
+```bash
+bash ~/my_github/sdd-dev-kit/scripts/install.sh --force --codex
+```
+
+Puis vérifiez l'intégration :
+
+```bash
+bash ~/my_github/sdd-dev-kit/scripts/check-sdd.sh
+```
+
+N'écrasez pas les faits du projet pendant une mise à jour. Conservez et relisez les fichiers propres au projet cible : `constitution.md`, `architecture.md`, `domain-map.md`, `glossary.md`, `modules/*` et `features/*`.
+
 ## Ce qu'il ne faut pas copier depuis un autre projet
 
 Ne copiez pas les faits SDD propres à un autre dépôt :

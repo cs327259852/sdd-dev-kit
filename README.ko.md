@@ -120,6 +120,54 @@ sdd-archive
 - Approved `tasks.md`가 없으면 코드를 변경할 수 없습니다.
 - 검증 실패는 아카이브를 막습니다.
 
+## 단계 롤백
+
+이미 검토된 상위 산출물이 더 이상 올바르지 않을 때 rollback을 사용합니다.
+
+```text
+sdd-tasks rollback
+{tasks.md를 변경해야 하는 이유}
+
+sdd-plan rollback
+{plan.md를 변경해야 하는 이유}
+
+sdd-spec rollback
+{spec.md를 변경해야 하는 이유}
+```
+
+롤백 규칙:
+
+- 작업이 누락되었거나 검증 항목이 불완전하면 `tasks.md`를 롤백합니다. 코드 변경을 계속하기 전에 다시 Approved가 필요합니다.
+- 설계, 영향 범위 또는 검증 전략이 잘못되었으면 `plan.md`를 롤백합니다. `tasks.md`도 다시 열립니다.
+- 요구사항, 인수 조건, 비즈니스 규칙, 권한, 데이터 의미 또는 호환성이 바뀌면 `spec.md`를 롤백합니다. `plan.md`와 `tasks.md`도 다시 열립니다.
+- 롤백 후에는 다시 열린 산출물이 사람의 게이트를 다시 통과할 때까지 코딩을 중지합니다.
+
+## 기존 도입 프로젝트 업데이트
+
+이미 SDD Dev Kit을 설치한 프로젝트에서 이 GitHub 저장소가 업데이트되면, 이식 가능한 워크플로우 파일만 업데이트합니다.
+
+```bash
+cd ~/my_github/sdd-dev-kit
+git pull
+
+cd /path/to/your-project
+bash ~/my_github/sdd-dev-kit/scripts/install.sh --force
+```
+
+대상 프로젝트가 Codex를 사용한다면:
+
+```bash
+bash ~/my_github/sdd-dev-kit/scripts/install.sh --force --codex
+```
+
+그다음 통합을 검증합니다.
+
+```bash
+bash ~/my_github/sdd-dev-kit/scripts/check-sdd.sh
+```
+
+업데이트 중 프로젝트 사실을 덮어쓰지 마세요. 대상 프로젝트 고유의 `constitution.md`, `architecture.md`, `domain-map.md`, `glossary.md`, `modules/*`, `features/*`는 유지하고 필요에 따라 검토해야 합니다.
+
 ## 다른 프로젝트에서 복사하면 안 되는 것
 
 다른 저장소의 프로젝트 전용 SDD 사실을 복사하지 마세요.

@@ -119,6 +119,54 @@ sdd-archive
 - 沒有 Approved `tasks.md`，不得修改程式碼。
 - 驗證失敗時不得歸檔。
 
+## 階段回滾
+
+當已經人工通過的上游產物不再正確時，使用回滾命令。
+
+```text
+sdd-tasks rollback
+{說明為什麼 tasks.md 需要修改}
+
+sdd-plan rollback
+{說明為什麼 plan.md 需要修改}
+
+sdd-spec rollback
+{說明為什麼 spec.md 需要修改}
+```
+
+回滾規則：
+
+- 任務遺漏或驗證項不完整時，回滾 `tasks.md`；繼續改程式碼前必須重新 Approved。
+- 方案、影響範圍或驗證策略錯誤時，回滾 `plan.md`；`tasks.md` 也會重新打開。
+- 需求、驗收條件、業務規則、權限、資料口徑或相容性變化時，回滾 `spec.md`；`plan.md` 和 `tasks.md` 也會重新打開。
+- 回滾後必須停止編碼，直到重新打開的產物再次通過人工門禁。
+
+## 已接入專案如何更新
+
+如果業務專案已經安裝過 SDD Dev Kit，而本 GitHub 倉庫後續有更新，只更新通用流程文件：
+
+```bash
+cd ~/my_github/sdd-dev-kit
+git pull
+
+cd /path/to/your-project
+bash ~/my_github/sdd-dev-kit/scripts/install.sh --force
+```
+
+如果目標專案使用 Codex：
+
+```bash
+bash ~/my_github/sdd-dev-kit/scripts/install.sh --force --codex
+```
+
+然後驗證整合：
+
+```bash
+bash ~/my_github/sdd-dev-kit/scripts/check-sdd.sh
+```
+
+更新時不要覆蓋專案事實來源。目標專案自己的 `constitution.md`、`architecture.md`、`domain-map.md`、`glossary.md`、`modules/*` 和 `features/*` 應保留並按需 review。
+
 ## 不要從其他專案複製的內容
 
 不要複製其他倉庫中的專案專屬 SDD 事實：

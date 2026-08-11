@@ -120,6 +120,54 @@ Las puertas de control son intencionales:
 - Sin `tasks.md` Approved, no hay cambios de código.
 - Una validación fallida bloquea el archivado.
 
+## Rollback de etapa
+
+Usa rollback cuando un artefacto ascendente ya revisado deja de ser correcto.
+
+```text
+sdd-tasks rollback
+{por qué debe cambiar tasks.md}
+
+sdd-plan rollback
+{por qué debe cambiar plan.md}
+
+sdd-spec rollback
+{por qué debe cambiar spec.md}
+```
+
+Reglas de rollback:
+
+- Si faltan tareas o la validación está incompleta, revierte `tasks.md`; debe aprobarse de nuevo antes de continuar con cambios de código.
+- Si el diseño, el alcance de impacto o la estrategia de validación es incorrecta, revierte `plan.md`; `tasks.md` también se reabre.
+- Si cambian requisitos, criterios de aceptación, reglas de negocio, permisos, significado de datos o compatibilidad, revierte `spec.md`; `plan.md` y `tasks.md` también se reabren.
+- Después de un rollback, detén la codificación hasta que los artefactos reabiertos vuelvan a pasar las puertas humanas.
+
+## Actualizar un proyecto existente
+
+Si un proyecto ya instaló SDD Dev Kit y este repositorio de GitHub recibe actualizaciones, actualiza solo los archivos portables del workflow:
+
+```bash
+cd ~/my_github/sdd-dev-kit
+git pull
+
+cd /path/to/your-project
+bash ~/my_github/sdd-dev-kit/scripts/install.sh --force
+```
+
+Si el proyecto destino usa Codex:
+
+```bash
+bash ~/my_github/sdd-dev-kit/scripts/install.sh --force --codex
+```
+
+Luego verifica la integración:
+
+```bash
+bash ~/my_github/sdd-dev-kit/scripts/check-sdd.sh
+```
+
+No sobrescribas hechos del proyecto durante una actualización. Conserva y revisa los archivos propios del proyecto destino: `constitution.md`, `architecture.md`, `domain-map.md`, `glossary.md`, `modules/*` y `features/*`.
+
 ## Qué no copiar desde otro proyecto
 
 No copies hechos SDD específicos de otro repositorio:

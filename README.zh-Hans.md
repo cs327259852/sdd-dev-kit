@@ -119,6 +119,54 @@ sdd-archive
 - 没有 Approved `tasks.md`，不得修改代码。
 - 验证失败时不得归档。
 
+## 阶段回滚
+
+当已经人工通过的上游产物不再正确时，使用回滚命令。
+
+```text
+sdd-tasks rollback
+{说明为什么 tasks.md 需要修改}
+
+sdd-plan rollback
+{说明为什么 plan.md 需要修改}
+
+sdd-spec rollback
+{说明为什么 spec.md 需要修改}
+```
+
+回滚规则：
+
+- 任务遗漏或验证项不完整时，回滚 `tasks.md`；继续改代码前必须重新 Approved。
+- 方案、影响范围或验证策略错误时，回滚 `plan.md`；`tasks.md` 也会重新打开。
+- 需求、验收条件、业务规则、权限、数据口径或兼容性变化时，回滚 `spec.md`；`plan.md` 和 `tasks.md` 也会重新打开。
+- 回滚后必须停止编码，直到重新打开的产物再次通过人工门禁。
+
+## 已接入项目如何更新
+
+如果业务项目已经安装过 SDD Dev Kit，而本 GitHub 仓库后续有更新，只更新通用流程文件：
+
+```bash
+cd ~/my_github/sdd-dev-kit
+git pull
+
+cd /path/to/your-project
+bash ~/my_github/sdd-dev-kit/scripts/install.sh --force
+```
+
+如果目标项目使用 Codex：
+
+```bash
+bash ~/my_github/sdd-dev-kit/scripts/install.sh --force --codex
+```
+
+然后验证集成：
+
+```bash
+bash ~/my_github/sdd-dev-kit/scripts/check-sdd.sh
+```
+
+更新时不要覆盖项目事实源。目标项目自己的 `constitution.md`、`architecture.md`、`domain-map.md`、`glossary.md`、`modules/*` 和 `features/*` 应保留并按需 review。
+
 ## 不要从其他项目复制的内容
 
 不要复制其他仓库中的项目专属 SDD 事实：

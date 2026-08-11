@@ -121,6 +121,54 @@ The hard gates are intentional:
 - No Approved `tasks.md`, no code changes.
 - Failed validation blocks archive.
 
+## Stage Rollback
+
+Use rollback when a reviewed upstream artifact is no longer correct.
+
+```text
+sdd-tasks rollback
+{why tasks.md must change}
+
+sdd-plan rollback
+{why plan.md must change}
+
+sdd-spec rollback
+{why spec.md must change}
+```
+
+Rollback rules:
+
+- If tasks are missing or validation is incomplete, roll back `tasks.md`; it must be approved again before code changes continue.
+- If the design, impact scope, or validation strategy is wrong, roll back `plan.md`; `tasks.md` is also reopened.
+- If requirements, acceptance criteria, business rules, permissions, data meaning, or compatibility changed, roll back `spec.md`; `plan.md` and `tasks.md` are also reopened.
+- After rollback, stop coding until the reopened artifacts pass the human gates again.
+
+## Updating an Existing Project
+
+If a project has already installed SDD Dev Kit and this GitHub repository receives updates, update only the portable workflow files:
+
+```bash
+cd ~/my_github/sdd-dev-kit
+git pull
+
+cd /path/to/your-project
+bash ~/my_github/sdd-dev-kit/scripts/install.sh --force
+```
+
+If the target project uses Codex:
+
+```bash
+bash ~/my_github/sdd-dev-kit/scripts/install.sh --force --codex
+```
+
+Then verify the integration:
+
+```bash
+bash ~/my_github/sdd-dev-kit/scripts/check-sdd.sh
+```
+
+Do not overwrite project facts during an update. Keep and review the target project's own `constitution.md`, `architecture.md`, `domain-map.md`, `glossary.md`, `modules/*`, and `features/*`.
+
 ## What Not To Copy From Another Project
 
 Do not copy project-specific SDD facts from another repository:

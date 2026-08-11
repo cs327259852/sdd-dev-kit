@@ -120,6 +120,54 @@ sdd-archive
 - Approved の `tasks.md` がなければ、コードを変更しない。
 - 検証失敗時はアーカイブしない。
 
+## ステージのロールバック
+
+レビュー済みの上流成果物が正しくなくなった場合は rollback を使います。
+
+```text
+sdd-tasks rollback
+{tasks.md を変更する理由}
+
+sdd-plan rollback
+{plan.md を変更する理由}
+
+sdd-spec rollback
+{spec.md を変更する理由}
+```
+
+ロールバック規則：
+
+- タスク漏れや検証不足がある場合は `tasks.md` をロールバックします。コード変更を続ける前に再度 Approved が必要です。
+- 設計、影響範囲、検証戦略が誤っている場合は `plan.md` をロールバックします。`tasks.md` も再オープンされます。
+- 要件、受け入れ条件、業務ルール、権限、データの意味、互換性が変わった場合は `spec.md` をロールバックします。`plan.md` と `tasks.md` も再オープンされます。
+- ロールバック後は、再オープンされた成果物が人によるゲートを再通過するまでコーディングを停止します。
+
+## 既存導入プロジェクトの更新
+
+すでに SDD Dev Kit を導入済みのプロジェクトで、この GitHub リポジトリに更新が入った場合は、移植可能なワークフローファイルだけを更新します。
+
+```bash
+cd ~/my_github/sdd-dev-kit
+git pull
+
+cd /path/to/your-project
+bash ~/my_github/sdd-dev-kit/scripts/install.sh --force
+```
+
+対象プロジェクトで Codex を使う場合：
+
+```bash
+bash ~/my_github/sdd-dev-kit/scripts/install.sh --force --codex
+```
+
+次に統合を検証します。
+
+```bash
+bash ~/my_github/sdd-dev-kit/scripts/check-sdd.sh
+```
+
+更新時にプロジェクト固有の事実を上書きしないでください。対象プロジェクト自身の `constitution.md`、`architecture.md`、`domain-map.md`、`glossary.md`、`modules/*`、`features/*` は保持し、必要に応じてレビューします。
+
 ## 他プロジェクトからコピーしてはいけないもの
 
 他リポジトリ固有の SDD 事実をコピーしないでください。
