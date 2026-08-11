@@ -94,6 +94,25 @@ sdd-validate
 sdd-archive
 ```
 
+## Cerrar las Open Questions de spec.md
+
+Antes de marcar `spec.md` como `Confirmed`, cada elemento de `Open Questions` debe cerrarse con una respuesta:
+
+```md
+- [x] Q: {pregunta}
+  A: {respuesta o decisión confirmada}
+```
+
+Solo después de que todas las Open Questions estén marcadas y respondidas, una persona debe actualizar:
+
+```md
+## 0. Confirmation
+
+- Status: Confirmed
+- Confirmed By: {name}
+- Confirmed At: {yyyy-mm-dd}
+```
+
 Las puertas de control son intencionales:
 
 - Sin `spec.md` Confirmed, no hay plan de implementación.
@@ -124,4 +143,3 @@ bash /path/to/sdd-dev-kit/scripts/check-sdd.sh
 ```
 
 El verificador confirma que existen los archivos portables del workflow y que no se instalaron por error hechos específicos de otro proyecto.
-

@@ -94,6 +94,25 @@ sdd-validate
 sdd-archive
 ```
 
+## spec.md の Open Questions を閉じる
+
+`spec.md` を `Confirmed` にする前に、`Open Questions` の各項目を回答付きで閉じる必要があります。
+
+```md
+- [x] Q: {質問}
+  A: {確認済みの回答または決定}
+```
+
+すべての Open Questions にチェックが付き、回答が記載された後でのみ、人が次を更新できます。
+
+```md
+## 0. Confirmation
+
+- Status: Confirmed
+- Confirmed By: {name}
+- Confirmed At: {yyyy-mm-dd}
+```
+
 ゲートは意図的に設けられています。
 
 - Confirmed の `spec.md` がなければ、実装計画を作らない。
@@ -124,4 +143,3 @@ bash /path/to/sdd-dev-kit/scripts/check-sdd.sh
 ```
 
 チェッカーは、移植可能なワークフローファイルが存在し、プロジェクト固有の事実が誤ってインストールされていないことを確認します。
-

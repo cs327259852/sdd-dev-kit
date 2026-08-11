@@ -94,6 +94,25 @@ sdd-validate
 sdd-archive
 ```
 
+## spec.md의 Open Questions 닫기
+
+`spec.md`를 `Confirmed`로 표시하기 전에 `Open Questions`의 모든 항목을 답변과 함께 닫아야 합니다.
+
+```md
+- [x] Q: {질문}
+  A: {확정된 답변 또는 결정}
+```
+
+모든 Open Questions가 체크되고 답변이 작성된 후에만 사람이 다음 내용을 업데이트해야 합니다.
+
+```md
+## 0. Confirmation
+
+- Status: Confirmed
+- Confirmed By: {name}
+- Confirmed At: {yyyy-mm-dd}
+```
+
 게이트는 의도적으로 설계되었습니다.
 
 - Confirmed `spec.md`가 없으면 구현 계획을 만들 수 없습니다.
@@ -124,4 +143,3 @@ bash /path/to/sdd-dev-kit/scripts/check-sdd.sh
 ```
 
 검사 스크립트는 이식 가능한 워크플로우 파일이 존재하는지, 프로젝트 전용 사실이 실수로 설치되지 않았는지 확인합니다.
-

@@ -93,6 +93,25 @@ sdd-validate
 sdd-archive
 ```
 
+## 關閉 spec.md 的 Open Questions
+
+將 `spec.md` 標記為 `Confirmed` 之前，必須為 `Open Questions` 中的每個問題補充答案並關閉：
+
+```md
+- [x] Q: {待確認問題}
+  A: {確認後的答案或決策}
+```
+
+只有所有 Open Questions 都已勾選並包含答案後，人工才能更新：
+
+```md
+## 0. Confirmation
+
+- Status: Confirmed
+- Confirmed By: {name}
+- Confirmed At: {yyyy-mm-dd}
+```
+
 階段門禁是強制設計：
 
 - 沒有 Confirmed `spec.md`，不得生成實作方案。
@@ -123,4 +142,3 @@ bash /path/to/sdd-dev-kit/scripts/check-sdd.sh
 ```
 
 檢查腳本會驗證可遷移工作流文件是否存在，並確認沒有意外安裝專案專屬事實來源。
-

@@ -95,6 +95,25 @@ sdd-validate
 sdd-archive
 ```
 
+## Closing spec.md Open Questions
+
+Before marking `spec.md` as `Confirmed`, every item in `Open Questions` must be closed with an answer:
+
+```md
+- [x] Q: {question}
+  A: {confirmed answer or decision}
+```
+
+Only after all Open Questions are checked and answered should a human update:
+
+```md
+## 0. Confirmation
+
+- Status: Confirmed
+- Confirmed By: {name}
+- Confirmed At: {yyyy-mm-dd}
+```
+
 The hard gates are intentional:
 
 - No Confirmed `spec.md`, no implementation plan.
