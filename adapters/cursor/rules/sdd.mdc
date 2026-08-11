@@ -1,0 +1,22 @@
+---
+description: SDD workflow rules for AI-assisted feature development
+globs:
+  - "**/*"
+alwaysApply: false
+---
+
+Use the root `AGENTS.md` as the routing entrypoint.
+
+For any `sdd-*` command or code-changing request, read:
+
+- `docs/sdd/AGENTS.md`
+- `docs/sdd/workflow.md`
+- `docs/sdd/commands/AGENTS.md`
+- `docs/sdd/commands/{command}.md`
+
+Do not modify production or test code unless the current feature has:
+
+- Confirmed `spec.md`
+- Reviewed `plan.md`
+- Approved `tasks.md`
+
