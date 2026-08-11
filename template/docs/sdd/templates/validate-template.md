@@ -43,8 +43,8 @@
 ### Commands
 
 ```bash
-./gradlew :jzt-release-infra:compileJava
-./gradlew :jzt-release-server:compileJava
+{project build command}
+{project lint/static check command，如适用}
 ```
 
 ### Result
@@ -64,7 +64,7 @@
 ### Commands
 
 ```bash
-./gradlew :jzt-release-server:test
+{project test command}
 ```
 
 ### Result
@@ -238,7 +238,7 @@
 检查方式：
 
 ```bash
-rg -n "password|token|secret|private-key|access_token|refresh_token" jzt-release-server/src/main/java jzt-release-infra/src/main/java
+rg -n "password|token|secret|private-key|access_token|refresh_token" {source paths}
 ```
 
 检查结论：

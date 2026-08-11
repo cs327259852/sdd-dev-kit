@@ -181,13 +181,12 @@ tasks 阶段交付物判断：
 
 需要执行的验证：
 
-- [ ] `./gradlew :jzt-release-infra:compileJava`
-- [ ] `./gradlew :jzt-release-server:compileJava`
-- [ ] `./gradlew :jzt-release-server:test`
+- [ ] `{project build command}`
+- [ ] `{project lint/static check command，如适用}`
+- [ ] `{project test command}`
 - [ ] API 验证
 - [ ] 存储层验证
-- [ ] ES 验证
-- [ ] Redis / RocketMQ 验证
+- [ ] 缓存 / 消息 / 搜索 / 文件存储验证，如适用
 - [ ] 权限 / SSO / Token 验证
 - [ ] 数据库密码链路验证
 - [ ] 最小影响范围验证

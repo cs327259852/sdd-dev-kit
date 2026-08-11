@@ -157,7 +157,7 @@
 ### Task 7: 补充自动化测试代码
 
 - 修改文件：
-  - `{test path，如 jzt-release-server/src/test/java/...}`
+  - `{test path，如 src/test/...、tests/... 或项目实际测试目录}`
 - 工作内容：
   - 根据 `plan.md` 的 Validation Plan 判断是否需要新增或更新测试用例。
   - 优先覆盖可自动化验证的 Acceptance Criteria。
@@ -167,7 +167,7 @@
   - [ ] 需要自动化覆盖的验收条件已有测试。
   - [ ] 不需要自动化覆盖的验收条件已说明原因。
 - 验证方式：
-  - Step 9A 执行 `./gradlew :jzt-release-server:test`
+  - Step 9A 执行 `{project test command}`
 
 ### Task 8: 执行 SDD 验证
 
@@ -216,8 +216,8 @@
 - [ ] 核对 `api-change.md`、`db-change.md`、`config-change.md` 与代码和配置变更一致
 - [ ] 核对 Project Docs Impact 中适用的项目级文档与代码、feature 文档和模块文档一致
 - [ ] 核对 Project Docs Impact 中不适用的项目级文档确有不适用原因
-- [ ] 编译 `jzt-release-infra`
-- [ ] 编译 `jzt-release-server`
+- [ ] 执行项目编译命令
+- [ ] 执行项目静态检查命令，如适用
 - [ ] 执行相关测试
 - [ ] 新增或更新必要的自动化测试
 - [ ] 验证最小影响范围
