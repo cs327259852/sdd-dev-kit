@@ -1,0 +1,49 @@
+{
+  "name": "sdd-dev-kit",
+  "version": "0.1.0",
+  "description": "Portable SDD workflow kit for AI-assisted software development",
+  "type": "module",
+  "bin": {
+    "sdd-dev-kit": "bin/sdd-dev-kit.js"
+  },
+  "scripts": {
+    "check": "node bin/sdd-dev-kit.js --help && bash -n scripts/install.sh && bash -n scripts/check-sdd.sh",
+    "pack:dry": "npm pack --dry-run"
+  },
+  "files": [
+    "bin",
+    "template",
+    "adapters",
+    "scripts",
+    "docs",
+    "README*.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "CONTRIBUTING.md",
+    "CODE_OF_CONDUCT.md",
+    "SECURITY.md",
+    "ROADMAP.md"
+  ],
+  "keywords": [
+    "sdd",
+    "spec-driven-development",
+    "ai-coding",
+    "codex",
+    "agents",
+    "developer-tools",
+    "workflow"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:cs327259852/sdd-dev-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cs327259852/sdd-dev-kit/issues"
+  },
+  "homepage": "https://github.com/cs327259852/sdd-dev-kit#readme",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}
+

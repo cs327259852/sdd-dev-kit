@@ -1,0 +1,6 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Questions and adoption discussions
+    url: https://github.com/cs327259852/sdd-dev-kit/discussions
+    about: Ask questions, share adoption notes, and discuss workflow ideas.
+

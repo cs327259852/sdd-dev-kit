@@ -1,9 +1,12 @@
 # SDD Dev Kit
 
+[![CI](https://github.com/cs327259852/sdd-dev-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/cs327259852/sdd-dev-kit/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 [English](README.en.md) | [Français](README.fr.md) | [Español](README.es.md) | [简体中文](README.zh-Hans.md) | [繁體中文](README.zh-Hant.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
-SDD Dev Kit is a portable workflow kit for AI-assisted software development.
-It gives coding agents a staged process:
+SDD Dev Kit is a lightweight, portable governance kit for AI-assisted software development.
+It keeps coding agents from jumping straight into code by forcing every meaningful change through human-reviewed artifacts:
 
 ```text
 sdd-bootstrap
@@ -16,9 +19,47 @@ sdd-validate
 sdd-archive
 ```
 
-The goal is not to copy one project's business knowledge into another project.
-The goal is to copy the workflow, gates, templates, and agent instructions, then
-let the target project generate its own facts through `sdd-bootstrap`.
+It is designed for teams that want spec-driven development without adopting a heavy platform first: copy the workflow, gates, templates, and agent instructions, then let each target project generate its own facts through `sdd-bootstrap`.
+
+## 30-Second Start
+
+Use npm:
+
+```bash
+npx sdd-dev-kit init --codex
+npx sdd-dev-kit check
+```
+
+If the npm package is not available yet, use the repository installer below.
+
+Or use the repository directly:
+
+```bash
+git clone https://github.com/cs327259852/sdd-dev-kit.git ~/my_github/sdd-dev-kit
+bash ~/my_github/sdd-dev-kit/scripts/install.sh --codex
+```
+
+Then ask your AI coding agent:
+
+```text
+sdd-bootstrap
+```
+
+## Why SDD Dev Kit
+
+- **Portable by default**: plain Markdown rules and templates, no service dependency.
+- **Project facts stay local**: each project owns its `constitution`, `architecture`, `domain-map`, `glossary`, `modules`, and `features`.
+- **Human gates are explicit**: no code changes before Confirmed `spec.md`, Reviewed `plan.md`, and Approved `tasks.md`.
+- **Rollback is part of the workflow**: reopen `tasks`, `plan`, or `spec` when implementation reveals a bad assumption.
+- **Agent-friendly**: works with Codex today, with room for Claude, Cursor, Copilot, and other adapters.
+
+## Demo
+
+See [docs/demo/walkthrough.md](docs/demo/walkthrough.md) for a small end-to-end adoption walkthrough.
+
+## Relationship To Spec Kit
+
+Spec Kit is a broader, ecosystem-oriented spec-driven development harness. SDD Dev Kit is intentionally smaller: it focuses on migrating existing business projects into a Markdown-first governance workflow with project fact sources, rollback rules, and agent routing files. Use Spec Kit when you want a complete extensible toolchain; use SDD Dev Kit when you want a lightweight process package that can be copied into an existing repository quickly.
 
 ## What This Project Contains
 
@@ -59,6 +100,12 @@ If the target project uses Codex and you want short command triggers:
 
 ```bash
 bash ~/my_github/sdd-dev-kit/scripts/install.sh --codex
+```
+
+Equivalent npm command:
+
+```bash
+npx sdd-dev-kit init --codex
 ```
 
 Then ask your AI coding agent:
@@ -167,6 +214,12 @@ Then verify the integration:
 bash ~/my_github/sdd-dev-kit/scripts/check-sdd.sh
 ```
 
+Equivalent npm command:
+
+```bash
+npx sdd-dev-kit check
+```
+
 Do not overwrite project facts during an update. Keep and review the target project's own `constitution.md`, `architecture.md`, `domain-map.md`, `glossary.md`, `modules/*`, and `features/*`.
 
 ## What Not To Copy From Another Project
@@ -193,3 +246,7 @@ bash /path/to/sdd-dev-kit/scripts/check-sdd.sh
 
 The checker validates that the portable workflow files exist and that no
 project-specific facts were installed accidentally.
+
+## Contributing
+
+Contributions are welcome. Good first areas include new agent adapters, Windows support, npm CLI improvements, demo projects, GitHub Actions checks, and documentation translations. See [CONTRIBUTING.md](CONTRIBUTING.md).
