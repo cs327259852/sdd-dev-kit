@@ -1,0 +1,41 @@
+name: Publish npm package
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+
+      - name: Validate scripts
+        run: npm run check
+
+      - name: Validate CLI installation
+        run: |
+          rm -rf /tmp/sdd-dev-kit-release
+          mkdir -p /tmp/sdd-dev-kit-release
+          node bin/sdd-dev-kit.js init --codex --target /tmp/sdd-dev-kit-release
+          node bin/sdd-dev-kit.js check --target /tmp/sdd-dev-kit-release
+          bash scripts/check-sdd.sh /tmp/sdd-dev-kit-release
+
+      - name: Validate package contents
+        run: npm pack --dry-run
+
+      - name: Publish
+        run: npm publish --provenance --access public
+
