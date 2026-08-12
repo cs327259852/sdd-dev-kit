@@ -27,7 +27,7 @@ Test installation into a temporary project:
 ```bash
 rm -rf /tmp/sdd-dev-kit-test
 mkdir -p /tmp/sdd-dev-kit-test
-node bin/sdd-dev-kit.js init --codex --target /tmp/sdd-dev-kit-test
+node bin/sdd-dev-kit.js init --all-agents --target /tmp/sdd-dev-kit-test
 node bin/sdd-dev-kit.js check --target /tmp/sdd-dev-kit-test
 ```
 
@@ -52,4 +52,3 @@ npm pack --dry-run
 3. Run `npm pack --dry-run`.
 4. Tag the release.
 5. Publish with npm provenance when available.
-

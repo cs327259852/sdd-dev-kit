@@ -4,9 +4,9 @@ These are useful starter contributions for the project.
 
 ## Agent Adapters
 
-- Add a Copilot instructions adapter.
-- Improve the Claude adapter with command examples.
-- Add more Cursor rule examples.
+- Add richer examples for existing agent adapters.
+- Add adapter compatibility notes for new agent versions.
+- Add tests that verify installed adapter paths.
 
 ## CLI
 
@@ -27,4 +27,3 @@ These are useful starter contributions for the project.
 - Add a GitHub Action that checks SDD gates in a target project.
 - Add tests for installed project structure.
 - Add release automation for npm publishing.
-

@@ -29,10 +29,9 @@ jobs:
         run: |
           rm -rf /tmp/sdd-dev-kit-ci
           mkdir -p /tmp/sdd-dev-kit-ci
-          node bin/sdd-dev-kit.js init --codex --target /tmp/sdd-dev-kit-ci
+          node bin/sdd-dev-kit.js init --all-agents --target /tmp/sdd-dev-kit-ci
           node bin/sdd-dev-kit.js check --target /tmp/sdd-dev-kit-ci
           bash scripts/check-sdd.sh /tmp/sdd-dev-kit-ci
 
       - name: Validate package contents
         run: npm pack --dry-run
-

@@ -10,6 +10,15 @@ From the target project:
 npx sdd-dev-kit init --codex
 ```
 
+For other agents:
+
+```bash
+npx sdd-dev-kit init --agent claude
+npx sdd-dev-kit init --agent gemini
+npx sdd-dev-kit init --agent copilot
+npx sdd-dev-kit init --all-agents
+```
+
 Expected result:
 
 ```text
@@ -128,4 +137,3 @@ npx sdd-dev-kit check
 ```
 
 The checker validates that the portable SDD workflow files exist and warns when project fact files are present and should be reviewed.
-

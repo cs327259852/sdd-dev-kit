@@ -35,11 +35,34 @@ const projectFactPaths = [
   "docs/sdd/glossary.md"
 ];
 
+const agentInstallers = {
+  codex: [
+    { type: "dir", src: "adapters/codex/skills", dst: ".codex/skills" }
+  ],
+  claude: [
+    { type: "file", src: "adapters/claude/CLAUDE.md", dst: "CLAUDE.md" }
+  ],
+  gemini: [
+    { type: "file", src: "adapters/gemini/GEMINI.md", dst: "GEMINI.md" }
+  ],
+  copilot: [
+    { type: "file", src: "adapters/copilot/copilot-instructions.md", dst: ".github/copilot-instructions.md" }
+  ],
+  cursor: [
+    { type: "dir", src: "adapters/cursor/rules", dst: ".cursor/rules" }
+  ],
+  windsurf: [
+    { type: "dir", src: "adapters/windsurf/rules", dst: ".windsurf/rules" }
+  ]
+};
+
+const allAgents = Object.keys(agentInstallers);
+
 function usage() {
   console.log(`SDD Dev Kit
 
 Usage:
-  sdd-dev-kit init [--codex] [--force] [--target DIR]
+  sdd-dev-kit init [--codex] [--agent NAME] [--all-agents] [--force] [--target DIR]
   sdd-dev-kit check [--target DIR]
   sdd-dev-kit version
 
@@ -49,15 +72,18 @@ Commands:
   version  Print the package version.
 
 Options:
-  --codex       Also install Codex skill entrypoints.
-  --force       Overwrite existing portable workflow files.
-  --target DIR  Target project directory. Defaults to current directory.
+  --agent NAME   Install an agent adapter. Supported: ${allAgents.join(", ")}.
+  --all-agents   Install all supported agent adapters.
+  --codex        Legacy shortcut for --agent codex.
+  --force        Overwrite existing portable workflow files.
+  --target DIR   Target project directory. Defaults to current directory.
 `);
 }
 
 function parseOptions(args) {
   const options = {
-    codex: false,
+    agents: new Set(),
+    allAgents: false,
     force: false,
     target: process.cwd()
   };
@@ -65,7 +91,20 @@ function parseOptions(args) {
   for (let i = 0; i < args.length; i += 1) {
     const arg = args[i];
     if (arg === "--codex") {
-      options.codex = true;
+      options.agents.add("codex");
+    } else if (arg === "--all-agents") {
+      options.allAgents = true;
+    } else if (arg === "--agent") {
+      const value = args[i + 1];
+      if (!value) {
+        throw new Error("Missing value for --agent");
+      }
+      const agent = value.toLowerCase();
+      if (!agentInstallers[agent]) {
+        throw new Error(`Unsupported agent: ${value}. Supported: ${allAgents.join(", ")}`);
+      }
+      options.agents.add(agent);
+      i += 1;
     } else if (arg === "--force") {
       options.force = true;
     } else if (arg === "--target") {
@@ -131,12 +170,24 @@ function init(options) {
   touch(path.join(target, "docs/sdd/modules/.gitkeep"));
   touch(path.join(target, ".sdd/.gitkeep"));
 
-  if (options.codex) {
-    copyDir(path.join(kitRoot, "adapters/codex/skills"), path.join(target, ".codex/skills"), options.force);
+  const selectedAgents = options.allAgents ? allAgents : Array.from(options.agents);
+  for (const agent of selectedAgents) {
+    for (const entry of agentInstallers[agent]) {
+      const src = path.join(kitRoot, entry.src);
+      const dst = path.join(target, entry.dst);
+      if (entry.type === "dir") {
+        copyDir(src, dst, options.force);
+      } else {
+        copyFile(src, dst, options.force);
+      }
+    }
   }
 
   console.log("");
   console.log("SDD workflow files installed.");
+  if (selectedAgents.length > 0) {
+    console.log(`Agent adapters installed: ${selectedAgents.join(", ")}`);
+  }
   console.log("Next: open the target project with your AI coding agent and run: sdd-bootstrap");
 }
 
@@ -216,4 +267,3 @@ function main() {
 }
 
 main();
-

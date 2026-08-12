@@ -26,7 +26,7 @@ It is designed for teams that want spec-driven development without adopting a he
 Use npm:
 
 ```bash
-npx sdd-dev-kit init --codex
+npx sdd-dev-kit init --agent codex
 npx sdd-dev-kit check
 ```
 
@@ -51,7 +51,7 @@ sdd-bootstrap
 - **Project facts stay local**: each project owns its `constitution`, `architecture`, `domain-map`, `glossary`, `modules`, and `features`.
 - **Human gates are explicit**: no code changes before Confirmed `spec.md`, Reviewed `plan.md`, and Approved `tasks.md`.
 - **Rollback is part of the workflow**: reopen `tasks`, `plan`, or `spec` when implementation reveals a bad assumption.
-- **Agent-friendly**: works with Codex today, with room for Claude, Cursor, Copilot, and other adapters.
+- **Agent-friendly**: supports Codex, Claude Code, Gemini CLI, GitHub Copilot, Cursor, and Windsurf adapters.
 
 ## Demo
 
@@ -74,8 +74,13 @@ template/
     migration/
 
 adapters/
+  claude/
   codex/
     skills/
+  copilot/
+  cursor/
+  gemini/
+  windsurf/
 
 scripts/
   install.sh
@@ -83,7 +88,7 @@ scripts/
 ```
 
 `template/` contains tool-neutral SDD rules and document templates.
-`adapters/codex/` contains Codex skill entrypoints for short commands.
+`adapters/` contains agent-specific routing files for Codex, Claude Code, Gemini CLI, GitHub Copilot, Cursor, and Windsurf.
 The command rules in `template/docs/sdd/commands/` are the source of truth.
 
 ## Quick Start
@@ -107,6 +112,22 @@ Equivalent npm command:
 ```bash
 npx sdd-dev-kit init --codex
 ```
+
+Install another agent adapter:
+
+```bash
+npx sdd-dev-kit init --agent claude
+npx sdd-dev-kit init --agent gemini
+npx sdd-dev-kit init --agent copilot
+```
+
+Install all supported adapters:
+
+```bash
+npx sdd-dev-kit init --all-agents
+```
+
+See [docs/adapters.md](docs/adapters.md) for adapter details and installed paths.
 
 Then ask your AI coding agent:
 

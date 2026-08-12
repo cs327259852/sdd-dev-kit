@@ -1,6 +1,6 @@
 # Release Guide
 
-This project can be published as the npm package `sdd-dev-kit`.
+This project is published as the npm package `sdd-dev-kit`.
 
 ## Current Package Name Check
 
@@ -65,4 +65,3 @@ Before each release:
 3. Run local validation.
 4. Commit the release changes.
 5. Create and push a matching tag.
-

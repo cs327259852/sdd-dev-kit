@@ -29,7 +29,7 @@ jobs:
         run: |
           rm -rf /tmp/sdd-dev-kit-release
           mkdir -p /tmp/sdd-dev-kit-release
-          node bin/sdd-dev-kit.js init --codex --target /tmp/sdd-dev-kit-release
+          node bin/sdd-dev-kit.js init --all-agents --target /tmp/sdd-dev-kit-release
           node bin/sdd-dev-kit.js check --target /tmp/sdd-dev-kit-release
           bash scripts/check-sdd.sh /tmp/sdd-dev-kit-release
 
@@ -38,4 +38,3 @@ jobs:
 
       - name: Publish
         run: npm publish --provenance --access public
-
